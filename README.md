@@ -1,1 +1,0 @@
-# apache-pig-vscode-extension

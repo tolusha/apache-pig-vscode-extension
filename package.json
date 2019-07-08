@@ -1,0 +1,80 @@
+{
+	"name": "apache-pig-debug",
+	"displayName": "Apache Pig Debug",
+	"description": "Apache Pig Debug",
+	"publisher": "tolusha",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.36.0"
+	},
+	"main": "./out/extension.js",
+	"scripts": {
+		"vscode:prepublish": "yarn run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "yarn run compile",
+		"test": "node ./out/test/runTest.js",
+		"postinstall": "rm -rf adapter && mkdir adapter && wget -O adapter/pig-debug.jar https://github.com/tolusha/pig-debug-adapter/releases/download/v0.2/pig-debug-0.2.jar"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^5.2.6",
+		"@types/node": "^10.12.21",
+		"@types/vscode": "^1.36.0",
+		"glob": "^7.1.4",
+		"mocha": "^6.1.4",
+		"typescript": "^3.3.1",
+		"tslint": "^5.12.1",
+		"vscode-test": "^1.0.0-next.0"
+	},
+	"contributes": {
+		"debuggers": [
+			{
+				"type": "pig-debug",
+				"label": "Pig debug",
+				"adapterExecutableCommand": "pig.adapterExecutable",
+				"configurationAttributes": {
+					"launch": {
+						"required": [
+							"program"
+						],
+						"properties": {
+							"program": {
+								"type": "string",
+								"description": "Absolute path to a pig file.",
+								"default": "${file}"
+							},
+							"stopOnEntry": {
+								"type": "boolean",
+								"description": "Automatically stop after launch.",
+								"default": true
+							}
+						}
+					}
+				},
+				"initialConfigurations": [
+					{
+						"type": "pig-debug",
+						"request": "launch",
+						"name": "Debugging a pig file",
+						"program": "${file}",
+						"stopOnEntry": true
+					}
+				],
+				"configurationSnippets": [
+					{
+						"label": "Pig Debug: Launch",
+						"description": "A new configuration for launching a Pig debug",
+						"body": {
+							"type": "pig",
+							"request": "launch",
+							"name": "Debugging a pig file",
+							"stopOnEntry": true,
+							"program": "^\"\\${file}\""
+						}
+					}
+				]
+			}
+		]
+	}
+}
