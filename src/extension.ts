@@ -1,14 +1,12 @@
-// The module 'vscode' contains the VS Code extensibility API
+// The module 'vscode' contains the VS Code extsensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { DebugConfigurationProvider, PIG_DEBUG } from './debug-configuration-provider';
 
 export function activate(context: vscode.ExtensionContext) {
-	vscode.commands.registerCommand('pig.adapterExecutable', () => provideDebugAdapterExecutable());
-
-	vscode.debug.registerDebugConfigurationProvider(PIG_DEBUG,
-		new DebugConfigurationProvider());
+	context.subscriptions.push(vscode.commands.registerCommand('pig.adapterExecutable', () => provideDebugAdapterExecutable()));
+	vscode.debug.registerDebugConfigurationProvider(PIG_DEBUG, new DebugConfigurationProvider());
 }
 
 function provideDebugAdapterExecutable(): any {

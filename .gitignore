@@ -1,0 +1,11 @@
+.DS_Store
+node_modules
+build
+lib
+*.log
+.idea
+.metadata
+*.iml
+.Trash-*
+out
+adapter

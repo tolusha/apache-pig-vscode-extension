@@ -27,6 +27,9 @@
 		"tslint": "^5.12.1",
 		"vscode-test": "^1.0.0-next.0"
 	},
+	"activationEvents": [
+		"onDebug"
+	],
 	"contributes": {
 		"debuggers": [
 			{
@@ -66,7 +69,7 @@
 						"label": "Pig Debug: Launch",
 						"description": "A new configuration for launching a Pig debug",
 						"body": {
-							"type": "pig",
+							"type": "pig-debug",
 							"request": "launch",
 							"name": "Debugging a pig file",
 							"stopOnEntry": true,
